@@ -1,51 +1,47 @@
-import React, { Component } from "react";
+import { useState } from 'react';
+import './Savings.css';
 
-export class Savings extends Component {
-  static displayName = Savings.name;
+export function Savings() {
+  return (
+    <div>
+      <SubmitButton />
+      <SliderComponent />
+      <DisplaySavingsComponent />
+    </div>
+  );
+}
 
-  constructor(props) {
-    super(props);
-    this.state = { savings: [], loading: true };
+function SliderComponent() {
+  var slider = document.getElementById("myRange");
+  var output = document.getElementById("demo");
+  output.innerHTML = slider.value; // Display the default slider value
+  
+  // Update the current slider value (each time you drag the slider handle)
+  function sliderInput() {
+    output.innerHTML = this.value;
   }
 
-  componentDidMount() {
-    this.populateSavingsData();
+  return(
+    <div class="slidecontainer">
+      <input type="range" min="1" max="100" value="50" class="slider" id="myRange" onInput={sliderInput}/>
+    </div>
+  );
+
+}
+function SubmitButton() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
   }
 
-  static renderSavingsInformation(savings) {
-    return (
-    <table className="table table-striped" aria-labelledby="tableLabel">
-    <tbody>
-       <tr>
-          <td>{savings.borrowingAmount}</td>
-       </tr>
-    </tbody>
-  </table>);
-  }
+  return (
+    <button onClick={handleClick}>
+      Submit
+    </button>
+  );
+}
 
-  render() {
-    console.log(this.state);
-    let contents = this.state.loading ? (
-      <p>
-        <em>F Loading...</em>
-      </p>
-    ) : (
-      Savings.renderSavingsInformation(this.state.savings)
-    );
-
-    return (
-      <div>
-        <h1 id="tableLabel">Savings Information</h1>
-        {contents}
-      </div>
-    );
-  }
-
-  async populateSavingsData() {
-    const response = await fetch('savings');
-    console.log('wtf is response ', response);
-    const data = await response.body;
-    this.setState({ savings: data, loading: false });
-  }
+function DisplaySavingsComponent() {
 
 }
