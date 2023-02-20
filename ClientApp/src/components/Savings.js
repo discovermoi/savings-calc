@@ -13,7 +13,17 @@ export class Savings extends Component {
   }
 
   static renderSavingsInformation(savings) {
-    return <h1>This will be the UI</h1>;
+    return (
+    <table className="table table-striped" aria-labelledby="tableLabel">
+      <h1>This will be the Savings Amount</h1>
+    <tbody>
+      {savings.map(savingsdata =>
+       <tr>
+          <td>{savingsdata.borrowingAmount}</td>
+       </tr>
+      )}
+    </tbody>
+  </table>);
   }
 
   render() {
@@ -38,39 +48,10 @@ export class Savings extends Component {
   }
 
   async populateSavingsData() {
-    var myHeaders = new Headers();
-    myHeaders.append(
-      "Authorization",
-      "Basic Nm1rcGs1ZWd1Z2UycjFtZWkwOHEwZDV1cjI6MTZzOTllcTMxZW5vNGE4MTc0cjl2cDlvZW1jbXMwMmVnbDNoYTNjazc5NHQ2azBqazNlbQ=="
-    );
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-      Merchant: "TIC",
-      Lender: "BEN",
-      RateType: "VAR",
-      RepaymentType: "PI",
-      PropertyUsage: "INV",
-      CustomerRate: 5,
-      LoanTerm: 20,
-      BorrowingAmount: 200000,
-      RateTerm: null,
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-      
-    };
-
-    fetch(
-      "https://api.stage.tictoc.ai/product/v1.0/calculator/getloancomparison",
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+    const response = await fetch('savingscalculator');
+    // console.log('wtf is response ', response);
+    // const data = await response.json();
+    // this.setState({ savings: data, loading: false });
   }
+
 }
