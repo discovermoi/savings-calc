@@ -15,21 +15,19 @@ export class Savings extends Component {
   static renderSavingsInformation(savings) {
     return (
     <table className="table table-striped" aria-labelledby="tableLabel">
-      <h1>This will be the Savings Amount</h1>
     <tbody>
-      {savings.map(savingsdata =>
        <tr>
-          <td>{savingsdata.borrowingAmount}</td>
+          <td>{savings.borrowingAmount}</td>
        </tr>
-      )}
     </tbody>
   </table>);
   }
 
   render() {
+    console.log(this.state);
     let contents = this.state.loading ? (
       <p>
-        <em>Loading...</em>
+        <em>F Loading...</em>
       </p>
     ) : (
       Savings.renderSavingsInformation(this.state.savings)
@@ -38,20 +36,16 @@ export class Savings extends Component {
     return (
       <div>
         <h1 id="tableLabel">Savings Information</h1>
-        <p>
-          This component demonstrates fetching savings information from the test
-          provider API.
-        </p>
         {contents}
       </div>
     );
   }
 
   async populateSavingsData() {
-    const response = await fetch('savingscalculator');
-    // console.log('wtf is response ', response);
-    // const data = await response.json();
-    // this.setState({ savings: data, loading: false });
+    const response = await fetch('savings');
+    console.log('wtf is response ', response);
+    const data = await response.body;
+    this.setState({ savings: data, loading: false });
   }
 
 }

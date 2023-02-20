@@ -1,6 +1,6 @@
-namespace savings_calc;
+namespace savings_calc.Models;
 
-public class SavingsCalculator
+public class TicModel
 {
     public int borrowingAmount {get; set; }
     
