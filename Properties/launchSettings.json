@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "savings_calc": {
+    "SavingsCalculator": {
       "commandName": "Project",
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7176;http://localhost:5001",

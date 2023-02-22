@@ -1,4 +1,4 @@
-namespace savings_calc.Models;
+namespace SavingsCalculator.Models;
 
 public class TicRequestModel
 {

@@ -27,3 +27,10 @@
     background: #04AA6D;
     cursor: pointer;
   }
+
+  .slider_component{
+    padding-bottom: 1%;
+  }
+  .display_component{
+    padding-top: 1%;
+  }

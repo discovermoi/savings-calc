@@ -1,6 +1,6 @@
 {
-  "short_name": "savings_calc",
-  "name": "savings_calc",
+  "short_name": "SavingsCalculator",
+  "name": "SavingsCalculator",
   "icons": [
     {
       "src": "favicon.ico",

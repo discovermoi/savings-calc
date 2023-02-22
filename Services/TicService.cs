@@ -1,43 +1,25 @@
-using savings_calc.Models;
+using SavingsCalculator.Models;
 
-namespace savings_calc.Services;
+namespace SavingsCalculator.Services;
 
 public static class TicService
 {
-    static List<TicModel> TicModels { get; }
+    static List<TicRequestModel> TicRequestModels { get; }
     static TicService()
     {
-        TicModels = new List<TicModel>
+        TicRequestModels = new List<TicRequestModel>
         {
-            new TicModel { merchant = "TIC", lender = "BEN", rateType = "VAR", repaymentType= "PI", propertyUsage= "INV", customerRate = 0.0429, loanTerm = 20, borrowingAmount = 600000, rateTerm = null },
-            new TicModel { merchant = "TIC", lender = "BEN", rateType = "VAR", repaymentType= "PI", propertyUsage= "INV", customerRate = 0.0729, loanTerm = 20, borrowingAmount = 500000, rateTerm = null }
+            new TicRequestModel { Merchant = "TIC", Lender = "BEN", RateType = "VAR", RepaymentType= "PI", PropertyUsage= "INV", CustomerRate = 0.0429, LoanTerm = 20, BorrowingAmount = 600000, RateTerm = null },
         };
     }
 
-    public static List<TicModel> GetAll() => TicModels;
+    public static List<TicRequestModel> GetAll() => TicRequestModels;
 
-    public static TicModel? Get(int id) => TicModels.FirstOrDefault(p => p.borrowingAmount == id);
+    public static TicRequestModel? Get(int id) => TicRequestModels.FirstOrDefault(p => p.BorrowingAmount == id);
 
-    public static void Add(TicModel TicModel)
+    public static void Add(TicRequestModel TicRequestModel)
     {
-        TicModels.Add(TicModel);
+        TicRequestModels.Add(TicRequestModel);
     }
 
-    public static void Delete(int id)
-    {
-        var TicModel = Get(id);
-        if(TicModel is null)
-            return;
-
-        TicModels.Remove(TicModel);
-    }
-
-    public static void Update(TicModel TicModel)
-    {
-        var index = TicModels.FindIndex(p => p.borrowingAmount == TicModel.borrowingAmount);
-        if(index == -1)
-            return;
-
-        TicModels[index] = TicModel;
-    }
 }

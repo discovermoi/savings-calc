@@ -1,4 +1,4 @@
-namespace savings_calc;
+namespace SavingsCalculator;
 
 public class WeatherForecast
 {

@@ -1,4 +1,4 @@
-using savings_calc.Models;
+using SavingsCalculator.Models;
 
 public class TicResponseModel
 {

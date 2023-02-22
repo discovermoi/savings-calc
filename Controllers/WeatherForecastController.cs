@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace savings_calc.Controllers;
+namespace SavingsCalculator.Controllers;
 
 [ApiController]
 [Route("[controller]")]
