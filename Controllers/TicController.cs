@@ -5,11 +5,6 @@ using SavingsCalculator.Services;
 
 namespace SavingsCalculator.Controllers;
 
-
-[Produces("application/json")]
-[Route("api/[controller]")]
-[ApiController]
-[EnableCors("ReactPolicy")]
 public class TicController : ControllerBase
 {
     private readonly ILogger<TicController> _logger;

@@ -1,43 +1,61 @@
-import { useState } from 'react';
-import Button from '@mui/material/Button';
-import { TextField } from '@mui/material';
-import './Savings.css';
 
-export function Savings() {
-  return (
-    <div>
-      <SliderComponent />
-      <SubmitButton />
-      <DisplaySavingsComponent />
-    </div>
-  );
-}
+import React, { Component } from 'react';
 
-function SliderComponent() {
-  return (
-  <div class="slider_component">
-    <TextField id="outlined-basic" label="Borrowing Amount" variant="outlined" />
-  </div>
-  );
-}
+export class Savings extends Component {
+  static displayName = Savings.name;
 
-function SubmitButton() {
-
-  function handleClick() {
-    alert('You have clicked Submit');
+  constructor(props) {
+    super(props);
+    this.state = { forecasts: [], loading: true };
   }
 
-  return (
-    <div>
-      <Button variant="contained" onClick={handleClick}> Submit </Button>
-    </div>
-  );
-}
+  componentDidMount() {
+    this.populateWeatherData();
+  }
 
-function DisplaySavingsComponent() {
-  return (
-    <div class="display_component">
-      <TextField id="outlined-basic" label="Savings Amount" variant="outlined" />
-    </div>
+  static renderForecastsTable(forecasts) {
+    return (
+      <table className="table table-striped" aria-labelledby="tableLabel">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Temp. (C)</th>
+            <th>Temp. (F)</th>
+            <th>Summary</th>
+          </tr>
+        </thead>
+        <tbody>
+          {forecasts.map(forecast =>
+            <tr key={forecast.date}>
+              <td>{forecast.date}</td>
+              <td>{forecast.temperatureC}</td>
+              <td>{forecast.temperatureF}</td>
+              <td>{forecast.summary}</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     );
+  }
+
+  render() {
+    let contents = this.state.loading
+      ? <p><em>Loading...</em></p>
+      : Savings.renderForecastsTable(this.state.forecasts);
+
+    return (
+      <div>
+        <h1 id="tableLabel">Savings Information</h1>
+        <p>This component demonstrates fetching data from the server.</p>
+        {contents}
+      </div>
+    );
+  }
+
+  async populateWeatherData() {
+    const response = await fetch('ticrequestmodel');
+    console.log('What is response ?', response);
+    const data = await response.json();
+    this.setState({ forecasts: data, loading: false });
+  }
 }
